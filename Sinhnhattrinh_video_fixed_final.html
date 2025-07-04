@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chúc Mừng Sinh Nhật, Trinhh Kaa!</title>
+<!-- Liên kết Google Fonts cho các phông chữ đẹp mắt -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&amp;family=Montserrat:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<!-- Liên kết Font Awesome cho biểu tượng (hiện tại không dùng nhưng có thể cần cho các tính năng sau) -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<style>
+        /* Đặt lại CSS cơ bản và thiết lập nền cho trang */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif; /* Phông chữ chính cho nội dung */
+            color: #fff; /* Màu chữ trắng */
+            /* Ảnh nền là bức tranh "Starry Night" của Van Gogh */
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1920px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg');
+            background-size: 110% 110%; /* Bắt đầu với kích thước lớn hơn để có thể phóng to/thu nhỏ */
+            background-position: center center; /* Căn giữa ảnh nền */
+            background-attachment: fixed; /* Giữ ảnh nền cố định khi cuộn */
+            display: flex;
+            flex-direction: column; /* Đổi thành column để nội dung xếp chồng và có thể cuộn */
+            justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+            align-items: center; /* Căn giữa nội dung theo chiều dọc */
+            min-height: 100vh; /* Đảm bảo body chiếm toàn bộ chiều cao khung nhìn */
+            position: relative;
+            /* Thêm hiệu ứng chuyển động nhẹ cho nền */
+            animation: zoomPanBackground 60s ease-in-out infinite alternate;
+        }
+
+        /* Keyframe cho hiệu ứng chuyển động nền */
+        @keyframes zoomPanBackground {
+            0% {
+                background-size: 110% 110%;
+                background-position: center center;
+            }
+            25% {
+                background-size: 115% 115%;
+                background-position: 60% 40%;
+            }
+            50% {
+                background-size: 120% 120%;
+                background-position: 40% 60%;
+            }
+            75% {
+                background-size: 115% 115%;
+                background-position: 70% 30%;
+            }
+            100% {
+                background-size: 110% 110%;
+                background-position: center center;
+            }
+        }
+
+        /* Lớp phủ để cải thiện khả năng đọc văn bản trên nền ảnh */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2); /* Đã giảm độ mờ của lớp phủ từ 0.4 xuống 0.2 */
+            z-index: 1; /* Đảm bảo lớp phủ nằm dưới nội dung chính */
+        }
+
+        /* Hiệu ứng lấp lánh cho các vì sao */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Cho phép tương tác với các phần tử bên dưới */
+            z-index: 1; /* Nằm trên lớp phủ nhưng dưới nội dung chính */
+        }
+
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #fff, 0 0 20px #FFD700, 0 0 30px #4A90E2; /* Màu vàng và xanh */
+            animation: twinkle var(--duration) ease-in-out infinite alternate,
+                       swirlStar var(--swirl-duration) linear infinite var(--swirl-delay);
+            opacity: 0; /* Mặc định ẩn */
+        }
+
+        /* Keyframe cho hiệu ứng nhấp nháy của sao */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Keyframe cho hiệu ứng xoay tròn và di chuyển nhẹ của sao */
+        @keyframes swirlStar {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0.5; }
+            25% { transform: translate(var(--x-move-1), var(--y-move-1)) rotate(90deg); opacity: 0.7; }
+            50% { transform: translate(var(--x-move-2), var(--y-move-2)) rotate(180deg); opacity: 1; }
+            75% { transform: translate(var(--x-move-3), var(--y-move-3)) rotate(270deg); opacity: 0.7; }
+            100% { transform: translate(0, 0) rotate(360deg); opacity: 0.5; }
+        }
+
+        /* Kiểu dáng cho khung chứa nội dung chính */
+        .container {
+            background-color: rgba(0, 0, 0, 0.6); /* Nền hơi trong suốt */
+            padding: 40px 60px;
+            border-radius: 15px; /* Góc bo tròn */
+            text-align: center;
+            /* Hiệu ứng phát sáng xanh và vàng lấy cảm hứng từ "Starry Night" */
+            box-shadow: 0 0 30px rgba(74, 144, 226, 0.7), 0 0 60px rgba(255, 215, 0, 0.7);
+            max-width: 900px;
+            width: 90%;
+            position: relative;
+            z-index: 2; /* Đảm bảo container nằm trên lớp phủ và sao */
+            animation: fadeIn 2s ease-in-out; /* Hiệu ứng mờ dần khi tải trang */
+            transform-style: preserve-3d; /* Giữ hiệu ứng 3D cho các phần tử con */
+            margin-top: 50px; /* Thêm margin để nội dung không bị dính vào top */
+            margin-bottom: 50px; /* Thêm margin để nội dung không bị dính vào bottom */
+        }
+
+        /* Keyframe cho hiệu ứng mờ dần */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Kiểu dáng cho tiêu đề chính */
+        h1 {
+            font-family: 'Dancing Script', cursive; /* Phông chữ kiểu viết tay */
+            font-size: 3.5em;
+            color: #FFD700; /* Màu vàng (Gold) */
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(74, 144, 226, 0.9); /* Hiệu ứng phát sáng xanh cho chữ */
+            animation: bounceIn 1.5s ease-out; /* Hiệu ứng nảy vào */
+        }
+
+        /* Kiểu dáng cho các đoạn văn bản có hiệu ứng */
+        p.animated-text {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #E0FFFF; /* Màu xanh ngọc nhạt cho văn bản */
+            opacity: 0; /* Mặc định ẩn */
+            transform: translateY(20px); /* Bắt đầu từ dưới lên một chút */
+            transition: opacity 1s ease-out, transform 1s ease-out; /* Hiệu ứng mờ dần và trượt lên */
+        }
+
+        /* Kiểu dáng cho phần lời chúc sinh nhật đặc biệt */
+        .birthday-message {
+            font-style: italic;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: rgba(74, 144, 226, 0.3); /* Nền xanh trong suốt */
+            border-radius: 10px;
+            border: 1px solid #FFD700; /* Viền vàng */
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); /* Bóng vàng */
+        }
+
+        /* Phần bánh sinh nhật */
+        .cake-section {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .cake-container {
+            width: 200px; /* Kích thước bánh bé hơn */
+            height: 200px; /* Kích thước bánh bé hơn */
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        /* Hình ảnh bánh sinh nhật */
+        .cake-image {
+            width: 100%;
+            height: 100%;
+            background-image: url('https://emojigraph.org/media/microsoft/birthday-cake_1f382.png');
+            background-size: contain; /* Đảm bảo hình ảnh vừa vặn */
+            background-repeat: no-repeat;
+            background-position: center;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out; /* Hiệu ứng phóng to khi di chuột */
+        }
+
+        .cake-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* Kiểu dáng cho nến chung */
+        .candle {
+            position: absolute;
+            width: 8px; /* Chiều rộng thân nến */
+            height: 30px; /* Chiều cao thân nến */
+            background-color: #f0f0f0; /* Màu thân nến */
+            border-radius: 2px;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        .candle .flame {
+            position: absolute;
+            top: -15px; /* Đặt ngọn lửa phía trên thân nến */
+            left: -1px; /* Căn giữa ngọn lửa trên thân nến */
+            width: 10px;
+            height: 25px;
+            background-color: yellow;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: 0 0 8px yellow, 0 0 15px orange;
+            animation: flicker 0.5s infinite alternate;
+            opacity: 0; /* Hidden by default */
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .candle .flame.active {
+            opacity: 1;
+        }
+
+        /* Vị trí của các ngọn nến trên bánh */
+        /* Các vị trí này có thể cần điều chỉnh lại một chút tùy thuộc vào hình ảnh bánh mới */
+        .candle-pos-1 { top: 30%; left: 25%; }
+        .candle-pos-2 { top: 25%; left: 40%; }
+        .candle-pos-3 { top: 30%; left: 55%; }
+        .candle-pos-4 { top: 25%; left: 70%; }
+
+
+        /* Keyframe cho hiệu ứng nhấp nháy của ngọn lửa */
+        @keyframes flicker {
+            0% { transform: scaleY(1); opacity: 1; }
+            50% { transform: scaleY(0.8); opacity: 0.8; }
+            100% { transform: scaleY(1); opacity: 1; }
+        }
+
+        /* Nút "Thổi Nến" */
+        .blow-button {
+            background-color: #FFD700; /* Màu vàng (Gold) */
+            color: #333; /* Màu chữ đen */
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out, transform 0.2s; /* Hiệu ứng chuyển động khi di chuột */
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4); /* Bóng vàng */
+            animation: buttonFlicker 1.5s infinite alternate; /* Thêm hiệu ứng nhấp nháy cho nút */
+            font-family: 'Montserrat', sans-serif; /* Đã đặt rõ ràng font chữ cho nút */
+        }
+
+        .blow-button:hover {
+            background-color: #e0b800; /* Màu vàng đậm hơn khi di chuột */
+            transform: translateY(-3px); /* Nút hơi nhấc lên */
+        }
+
+        /* Keyframe cho hiệu ứng nhấp nháy của nút */
+        @keyframes buttonFlicker {
+            0% { box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4); }
+            50% { box-shadow: 0 5px 25px rgba(255, 215, 0, 0.8), 0 0 10px rgba(74, 144, 226, 0.6); } /* Nhấp nháy mạnh hơn với màu xanh */
+            100% { box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4); }
+        }
+
+        /* Vùng chứa pháo hoa */
+        .confetti-container {
+            position: fixed; /* Sử dụng fixed để đảm bảo nó bao phủ toàn bộ khung nhìn */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 3;
+        }
+
+        /* Các mảnh pháo hoa */
+        
+
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #FFD700;
+    border-radius: 50%;
+    opacity: 0;
+    transform: translateY(0) scale(0);
+    animation: fireworkEffect var(--duration) ease-out forwards;
+    animation-delay: var(--delay);
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.7);
+}
+.confetti.blue { background-color: #4A90E2; }
+.confetti.yellow { background-color: #FFD700; }
+.confetti.white { background-color: #FFFFFF; }
+.confetti.red { background-color: red; }
+.confetti.lime { background-color: lime; }
+.confetti.cyan { background-color: cyan; }
+.confetti.magenta { background-color: magenta; }
+.confetti.orange { background-color: orange; }
+.confetti.blue { background-color: #4A90E2; }
+        .confetti.yellow { background-color: #FFD700; }
+        .confetti.white { background-color: #FFFFFF; } /* Thêm màu trắng cho pháo hoa */
+
+        /* Keyframe cho hiệu ứng pháo hoa */
+        @keyframes fireworkEffect {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0); /* Bắt đầu tại vị trí gốc, ẩn, nhỏ */
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(var(--initial-y)) scale(0.5); /* Bắn lên */
+            }
+            20% {
+                opacity: 1;
+                transform: translateY(var(--peak-y)) scale(1); /* Đạt đỉnh, hiển thị đầy đủ, kích thước đầy đủ */
+                box-shadow: 0 0 15px currentColor, 0 0 30px currentColor; /* Hiệu ứng chớp sáng */
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(var(--final-y)) scale(0) rotateZ(720deg); /* Rơi xuống, mờ dần, thu nhỏ, xoay */
+                box-shadow: none; /* Xóa hiệu ứng chớp sáng */
+            }
+        }
+
+        /* Modal Popup Styling */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8); /* Nền tối mờ */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Đảm bảo modal nằm trên cùng */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: rgba(255, 255, 255, 0.95); /* Nền trắng hơi trong suốt */
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(74, 144, 226, 0.8), 0 0 40px rgba(255, 215, 0, 0.8);
+            max-width: 700px;
+            width: 90%;
+            color: #333; /* Màu chữ tối cho dễ đọc trong modal */
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-content h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2em;
+            color: #4A90E2; /* Màu xanh cho tiêu đề popup */
+            margin-bottom: 20px;
+        }
+
+        .modal-content iframe {
+            width: 100%;
+            height: 350px; /* Chiều cao video */
+            border-radius: 10px;
+            border: 2px solid #FFD700; /* Viền vàng cho video */
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            margin-top: 20px;
+        }
+
+        .modal-close-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.8em;
+            color: #666;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .modal-close-button:hover {
+            color: #FFD700;
+        }
+    
+.sunflower {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-image: url('https://em-content.zobj.net/source/microsoft-teams/337/sunflower_1f33b.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: riseUp 10s linear forwards;
+    pointer-events: none;
+    z-index: 2;
+}
+
+
+@keyframes riseUp {
+    0% {
+        transform: translateY(0);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+    100% {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+<body><div id="sunflower-container" style="position: fixed; left: 0; bottom: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2;"></div>
+<!-- Container cho hiệu ứng pháo hoa -->
+<div class="confetti-container" id="confetti-container"></div>
+<!-- Container cho hiệu ứng lấp lánh của các vì sao -->
+<div class="stars" id="stars-container"></div>
+<!-- Container chính của trang web -->
+<div class="container">
+<h1>Chúc Mừng Sinh Nhật, Trinhh Kaa!</h1>
+<!-- Các đoạn văn bản sẽ xuất hiện lần lượt -->
+<p class="animated-text">Gửi cô gái cung Cự Giải đặc biệt.</p>
+<p class="animated-text">Hôm nay là ngày sinh nhật của cậu, ngày 11 tháng 7 năm 2001, ngày đánh dấu cột mốc 24 năm trưởng thành của cậu.</p>
+<p class="animated-text">Cảm ơn vì đã luôn là một ánh sáng dịu dàng giữa thế giới xô bồ này.</p>
+<p class="animated-text">Và Cảm ơn vì đã hiện diện ở trên cuộc đời này.</p>
+<div class="birthday-message">
+<p class="animated-text"><strong>Chúc Trinhh ngày càng xinh đẹp, hạnh phúc và cuộc đời sẽ ngày càng đối xử với cậu nhẹ nhàng hơn. Và hơn hết chúc cậu có một ngày ấm áp, trọn vẹn bên gia đình và những người yêu thương nha !</strong></p>
+</div>
+<div class="cake-section">
+<h2>Hãy thổi nến nhé!</h2>
+<div class="cake-container">
+<div class="cake-image" id="cakeImage">
+<!-- Các ngọn nến lung linh -->
+<div class="candle candle-pos-1">
+<span class="flame active"></span>
+</div>
+<div class="candle candle-pos-2">
+<span class="flame active"></span>
+</div>
+<div class="candle candle-pos-3">
+<span class="flame active"></span>
+</div>
+<div class="candle candle-pos-4">
+<span class="flame active"></span>
+</div>
+<!-- Bạn có thể thêm nhiều nến hơn nếu muốn -->
+</div>
+</div>
+<!-- Nút để thổi nến -->
+<button class="blow-button" id="blowButton">Thổi Nến</button>
+</div>
+</div>
+<!-- Modal Popup -->
+<div class="modal-overlay" id="birthdayModal">
+<div class="modal-content">
+<button class="modal-close-button" id="closeModalButton">×</button>
+<h3>Hãy tận hưởng trọn vẹn ngày hôm nay nhé!</h3>
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/ho5JGbGbdaM?autoplay=1" title="YouTube video player" width="560">
+</iframe>
+</div>
+</div>
+<script>
+        // Lấy các phần tử DOM cần thiết
+        const blowButton = document.getElementById('blowButton');
+        const allFlames = document.querySelectorAll('.candle .flame'); // Lấy tất cả các ngọn lửa
+        const confettiContainer = document.getElementById('confetti-container');
+        const starsContainer = document.getElementById('stars-container');
+        const birthdayModal = document.getElementById('birthdayModal');
+        const closeModalButton = document.getElementById('closeModalButton');
+        const youtubeVideoModal = birthdayModal.querySelector('iframe'); // Lấy iframe video trong modal
+        const animatedTexts = document.querySelectorAll('.animated-text'); // Lấy tất cả các đoạn văn bản cần hiệu ứng
+
+        // Hàm để hiển thị từng dòng chữ lần lượt
+        function revealTextSequentially() {
+            animatedTexts.forEach((p, index) => {
+                setTimeout(() => {
+                    p.style.opacity = '1'; // Làm cho đoạn văn bản hiện ra
+                    p.style.transform = 'translateY(0)'; // Di chuyển lên vị trí ban đầu
+                }, index * 1500); // Mỗi đoạn xuất hiện cách nhau 1.5 giây
+            });
+        }
+
+        // Ban đầu, tất cả các ngọn lửa nến sẽ được hiển thị
+        allFlames.forEach(flame => {
+            flame.classList.add('active');
+        });
+
+        // Thêm sự kiện click cho nút "Thổi Nến"
+        blowButton.addEventListener('click', () => {
+            // Ẩn tất cả các ngọn lửa nến
+            allFlames.forEach(flame => {
+                flame.classList.remove('active');
+            });
+            blowButton.classList.add('hidden'); // Ẩn nút "Thổi Nến"
+
+            // Kích hoạt hiệu ứng pháo hoa
+            createFireworks(); // Gọi hàm tạo pháo hoa
+
+            // Hiển thị modal sau một khoảng thời gian ngắn
+            setTimeout(() => {
+                birthdayModal.classList.add('active');
+                // Tự động phát video trong modal khi nó hiện ra
+                youtubeVideoModal.src = "https://www.youtube.com/embed/Wu8NeFXaoOc?autoplay=1"; // Bỏ mute để video trong modal có tiếng
+            }, 1000); // 1 giây sau khi thổi nến
+        });
+
+        // Đóng modal khi nhấn nút đóng
+        closeModalButton.addEventListener('click', () => {
+            birthdayModal.classList.remove('active');
+            // Dừng video khi đóng modal để tiết kiệm tài nguyên
+            youtubeVideoModal.src = "";
+        });
+
+        // Hàm tạo hiệu ứng pháo hoa
+        function createFireworks() {
+            const colors = ['yellow', 'blue', 'white', 'red', 'lime', 'cyan', 'magenta', 'orange']; // Màu pháo hoa: vàng, xanh, trắng
+            const numberOfParticles = 400; // Tăng số lượng hạt để hiệu ứng dày đặc hơn
+            for (let i = 0; i < numberOfParticles; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                // Chọn màu ngẫu nhiên cho mảnh pháo hoa
+                confetti.classList.add(colors[Math.floor(Math.random() * colors.length)]);
+
+                // Vị trí bắt đầu ngẫu nhiên (từ dưới lên)
+                const startX = Math.random() * 100; // từ 0vw đến 100vw
+                const startY = 100; // Bắt đầu từ 100vh (dưới cùng của màn hình)
+
+                confetti.style.left = `${startX}vw`;
+                confetti.style.top = `100vh`;
+
+                // Các biến CSS tùy chỉnh cho hiệu ứng pháo hoa
+                const initialY = Math.random() * -50 - 20; // Bắn lên ban đầu: từ -20vh đến -70vh (so với vị trí ban đầu)
+                const peakY = Math.random() * -100 - 50; // Đạt đỉnh: từ -50vh đến -150vh (cao hơn nữa)
+                const finalY = Math.random() * 100 + 50; // Rơi xuống: từ +50vh đến +150vh (ra khỏi màn hình)
+
+                confetti.style.setProperty('--initial-y', `${initialY}vh`);
+                confetti.style.setProperty('--peak-y', `${peakY}vh`);
+                confetti.style.setProperty('--final-y', `${finalY}vh`);
+
+                confetti.style.setProperty('--duration', `${Math.random() * 3 + 2}s`); // Thời lượng animation từ 2-5 giây
+                confetti.style.setProperty('--delay', `${Math.random() * 1.5}s`); // Độ trễ ngẫu nhiên để các hạt xuất hiện so le
+
+                confettiContainer.appendChild(confetti);
+            }
+            // Xóa các hạt pháo hoa sau một khoảng thời gian để tránh vấn đề hiệu suất
+            setTimeout(() => {
+                confettiContainer.innerHTML = '';
+            }, 6000); // Đủ thời gian cho animation kết thúc
+        }
+
+        // Hàm tạo hiệu ứng sao lấp lánh
+        function createStars() {
+            const numberOfStars = 150; // Số lượng sao
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                const size = Math.random() * 3 + 1; // Kích thước sao từ 1px đến 4px
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${Math.random() * 100}vw`;
+                star.style.top = `${Math.random() * 100}vh`;
+                star.style.setProperty('--duration', `${Math.random() * 3 + 1}s`); // Thời lượng nhấp nháy
+                star.style.setProperty('--swirl-duration', `${Math.random() * 20 + 10}s`); // Thời lượng xoay tròn
+                star.style.setProperty('--swirl-delay', `${Math.random() * 10}s`); // Độ trễ xoay tròn
+                // Các giá trị ngẫu nhiên cho di chuyển sao
+                star.style.setProperty('--x-move-1', `${(Math.random() - 0.5) * 50}px`);
+                star.style.setProperty('--y-move-1', `${(Math.random() - 0.5) * 50}px`);
+                star.style.setProperty('--x-move-2', `${(Math.random() - 0.5) * 50}px`);
+                star.style.setProperty('--y-move-2', `${(Math.random() - 0.5) * 50}px`);
+                star.style.setProperty('--x-move-3', `${(Math.random() - 0.5) * 50}px`);
+                star.style.setProperty('--y-move-3', `${(Math.random() - 0.5) * 50}px`);
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Gọi hàm tạo sao khi trang tải xong
+        document.addEventListener('DOMContentLoaded', () => {
+    createFireworks();
+        const music = document.getElementById('backgroundMusic');
+        music.volume = 0.5;
+        music.play().catch(() => {
+            console.log("Trình duyệt chặn autoplay. Hãy click tương tác để phát nhạc.");
+        });
+
+            createStars();
+            // Gọi hàm hiển thị văn bản lần lượt sau một khoảng thời gian ngắn
+            setTimeout(revealTextSequentially, 1500); // Bắt đầu sau 1.5 giây để tiêu đề chính xuất hiện trước
+        });
+    </script>
+<audio autoplay="" id="backgroundMusic" loop="">
+<source src="ChucMungSinhNhat-PhanDinhTung-2804028.mp3" type="audio/mpeg"/>
+  Trình duyệt của bạn không hỗ trợ phát nhạc.
+</audio>
+<div id="musicToggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 1001; background-color: #FFD700; border-radius: 50%; padding: 12px; cursor: pointer; box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);">
+<i class="fas fa-volume-up" id="musicIcon" style="color: #333; font-size: 20px;"></i>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const music = document.getElementById('backgroundMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    const musicIcon = document.getElementById('musicIcon');
+
+    let isPlaying = false;
+
+    function updateIcon() {
+        musicIcon.className = isPlaying ? "fas fa-volume-up" : "fas fa-volume-mute";
+    }
+
+    musicToggle.addEventListener('click', () => {
+        if (isPlaying) {
+            music.pause();
+        } else {
+            music.play().catch(() => {
+                console.log("Không thể phát nhạc do giới hạn của trình duyệt.");
+            });
+        }
+        isPlaying = !isPlaying;
+        updateIcon();
+    });
+
+    updateIcon(); // Khởi tạo biểu tượng
+});
+</script>
+<script>
+function createBurst(x, y) {
+    const confettiContainer = document.getElementById('confetti-container');
+    const colors = ['#FFD700', '#FF6347', '#87CEEB', '#ADFF2F', '#FF69B4'];
+    const numParticles = 16;
+    for (let i = 0; i < numParticles; i++) {
+        const angle = (Math.PI * 2 * i) / numParticles;
+        const distance = Math.random() * 80 + 40;
+        const dx = Math.cos(angle) * distance;
+        const dy = Math.sin(angle) * distance;
+
+        const particle = document.createElement('div');
+        particle.className = 'confetti';
+        particle.style.left = `${x}px`;
+        particle.style.top = `${y}px`;
+        particle.style.setProperty('--x', `${dx}px`);
+        particle.style.setProperty('--y', `${dy}px`);
+        particle.style.color = colors[Math.floor(Math.random() * colors.length)];
+
+        confettiContainer.appendChild(particle);
+        setTimeout(() => particle.remove(), 1500);
+    }
+}
+
+function launchFirework() {
+    const x = Math.random() * window.innerWidth * 0.8 + window.innerWidth * 0.1;
+    const y = Math.random() * window.innerHeight * 0.5 + window.innerHeight * 0.1;
+    createBurst(x, y);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    setInterval(launchFirework, 2000);
+});
+</script>
+<script>
+function launchSunflower() {
+    const container = document.getElementById('sunflower-container');
+    const flower = document.createElement('div');
+    flower.className = 'sunflower';
+    flower.style.left = `${Math.random() * 100}vw`;
+    flower.style.bottom = '-40px';
+    container.appendChild(flower);
+
+    setTimeout(() => flower.remove(), 6000);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    setInterval(launchSunflower, 1500);
+});
+</script>
+</body>
+</html>
